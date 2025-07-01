@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshat Kumar - Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 100, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.8);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(0, 100, 255, 0.3);
+            border: 3px solid #00ccff;
+            padding: 20px;
+        }
+
+        .logo-svg {
+            width: 80px;
+            height: 80px;
+            fill: #00ccff;
+            transition: all 0.3s ease;
+        }
+
+        .profile-image:hover .logo-svg {
+            fill: #0066ff;
+            transform: scale(1.1);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00ccff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 200, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(0, 200, 255, 0.8); }
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin: 60px 0;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 100, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 100, 255, 0.2);
+            border-color: rgba(0, 200, 255, 0.5);
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .skill-card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 100, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 200, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(100%, 100%);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 100, 255, 0.3);
+            border-color: rgba(0, 200, 255, 0.6);
+        }
+
+        .skill-logo {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .skill-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00ccff;
+        }
+
+        .skill-level {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .cert-card {
+            background: linear-gradient(135deg, #0066ff, #00ccff);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(0, 200, 255, 0.3);
+        }
+
+        .cert-card::before {
+            content: '🏆';
+            font-size: 4em;
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            opacity: 0.2;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cert-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 100, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(0, 200, 255, 0.3);
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 100, 255, 0.4);
+            border-color: rgba(0, 200, 255, 0.8);
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatShapes 20s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            background: #0066ff;
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            background: #00ccff;
+            border-radius: 20px;
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            width: 60px;
+            height: 60px;
+            background: #004080;
+            border-radius: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatShapes {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(0, 100, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 100, 255, 0.3);
+            border-color: rgba(0, 200, 255, 0.6);
+        }
+
+        .project-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #00ccff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .project-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(0, 100, 255, 0.2);
+            color: #00ccff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid rgba(0, 100, 255, 0.3);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 200, 255, 0.3);
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 100, 255, 0.3);
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            width: 100%;
+            background: rgba(10, 20, 40, 0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+        }
+
+        nav .logo {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #00ccff;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 32px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.2s;
+        }
+
+        /* Section IDs for Navigation */
+        #about, #skills, #projects, #education, #contact {
+            scroll-margin-top: 80px; /* Adjusts for fixed navbar */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <span class="logo">Akshat Kumar</span>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <div class="profile-image">
+                <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Tech circuit logo -->
+                    <g transform="translate(100,100)">
+                        <!-- Central hub -->
+                        <circle cx="0" cy="0" r="8" fill="currentColor"/>
+                        
+                        <!-- Top branch -->
+                        <line x1="0" y1="-8" x2="0" y2="-40" stroke="currentColor" stroke-width="4"/>
+                        <circle cx="0" cy="-40" r="6" fill="currentColor"/>
+                        <line x1="0" y1="-40" x2="-25" y2="-65" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="-25" cy="-65" r="5" fill="currentColor"/>
+                        <line x1="0" y1="-40" x2="25" y2="-65" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="25" cy="-65" r="5" fill="currentColor"/>
+                        
+                        <!-- Right branch -->
+                        <line x1="8" y1="0" x2="40" y2="0" stroke="currentColor" stroke-width="4"/>
+                        <circle cx="40" cy="0" r="6" fill="currentColor"/>
+                        <line x1="40" y1="0" x2="65" y2="-25" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="65" cy="-25" r="5" fill="currentColor"/>
+                        <line x1="40" y1="0" x2="65" y2="25" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="65" cy="25" r="5" fill="currentColor"/>
+                        
+                        <!-- Bottom branch -->
+                        <line x1="0" y1="8" x2="0" y2="40" stroke="currentColor" stroke-width="4"/>
+                        <circle cx="0" cy="40" r="6" fill="currentColor"/>
+                        <line x1="0" y1="40" x2="-25" y2="65" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="-25" cy="65" r="5" fill="currentColor"/>
+                        <line x1="0" y1="40" x2="25" y2="65" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="25" cy="65" r="5" fill="currentColor"/>
+                        
+                        <!-- Left branch -->
+                        <line x1="-8" y1="0" x2="-40" y2="0" stroke="currentColor" stroke-width="4"/>
+                        <circle cx="-40" cy="0" r="6" fill="currentColor"/>
+                        <line x1="-40" y1="0" x2="-65" y2="-25" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="-65" cy="-25" r="5" fill="currentColor"/>
+                        <line x1="-40" y1="0" x2="-65" y2="25" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="-65" cy="25" r="5" fill="currentColor"/>
+                        
+                        <!-- Code brackets -->
+                        <path d="M -30 -15 L -40 -5 L -40 5 L -30 15" stroke="currentColor" stroke-width="3" fill="none"/>
+                        <path d="M 30 -15 L 40 -5 L 40 5 L 30 15" stroke="currentColor" stroke-width="3" fill="none"/>
+                        
+                        <!-- Small connection dots -->
+                        <circle cx="-15" cy="-15" r="2" fill="currentColor"/>
+                        <circle cx="15" cy="-15" r="2" fill="currentColor"/>
+                        <circle cx="-15" cy="15" r="2" fill="currentColor"/>
+                        <circle cx="15" cy="15" r="2" fill="currentColor"/>
+                        
+                        <!-- Data flow lines -->
+                        <rect x="-20" y="-3" width="8" height="2" fill="currentColor"/>
+                        <rect x="12" y="-3" width="8" height="2" fill="currentColor"/>
+                        <rect x="-3" y="-20" width="2" height="8" fill="currentColor"/>
+                        <rect x="-3" y="12" width="2" height="8" fill="currentColor"/>
+                    </g>
+                </svg>
+            </div>
+            <h1>Akshat Kumar</h1>
+            <p>Computer Applications Student & Aspiring Developer</p>
+        </div>
+
+        <div class="section" id="about">
+            <h2>About Me</h2>
+            <p style="font-size: 1.1em; line-height: 1.8; text-align: center; opacity: 0.9;">
+                I'm a passionate BCA student with a strong foundation in programming and web development. 
+                Currently pursuing my Bachelor's in Computer Applications, I'm dedicated to mastering 
+                modern technologies and building innovative solutions. My journey in coding has equipped 
+                me with diverse skills across multiple programming languages and frameworks.
+            </p>
+        </div>
+
+        <div class="section" id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-name">C Language</div>
+                    <div class="skill-level">System Programming</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">C++</div>
+                    <div class="skill-level">Object-Oriented Programming</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Python</div>
+                    <div class="skill-level">Data Science & Backend</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">HTML</div>
+                    <div class="skill-level">Web Structure</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">CSS</div>
+                    <div class="skill-level">Web Styling</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">JavaScript</div>
+                    <div class="skill-level">Interactive Web Apps</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">React</div>
+                    <div class="skill-level">Modern UI Development</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="projects">
+            <h2>Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-title">
+                        <!-- <div class="project-icon"></div> -->
+                        Personal Portfolio Website
+                    </div>
+                    <div class="project-description">
+                        A modern, responsive portfolio website built with HTML, CSS, and JavaScript. 
+                        Features smooth animations, glassmorphism design, and mobile-first approach 
+                        to showcase my skills and projects professionally.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Live Demo</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">
+                        <!-- <div class="project-icon"></div> -->
+                        React Task Manager
+                    </div>
+                    <div class="project-description">
+                        A dynamic task management application built with React. Includes features like 
+                        task creation, completion tracking, filtering, and local storage persistence. 
+                        Demonstrates component-based architecture and state management.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">CSS3</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Live Demo</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">
+                        <!-- <div class="project-icon"></div> -->
+                        Python Data Analyzer
+                    </div>
+                    <div class="project-description">
+                        A comprehensive data analysis tool built with Python. Processes CSV files, 
+                        generates statistical insights, and creates visualizations. Showcases 
+                        data manipulation and analysis skills using pandas and matplotlib.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Matplotlib</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">GitHub</a>
+                        <a href="#" class="project-link">Documentation</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">
+                        <!-- <div class="project-icon"></div> -->
+                        C++ Console Game
+                    </div>
+                    <div class="project-description">
+                        An interactive console-based game developed in C++. Features game logic, 
+                        score tracking, and user input handling. Demonstrates object-oriented 
+                        programming principles and memory management.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">OOP</span>
+                        <span class="tech-tag">Console</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">GitHub</a>
+                        <a href="#" class="project-link">Download</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">
+                        <!-- <div class="project-icon"></div> -->
+                        Interactive Web Calculator
+                    </div>
+                    <div class="project-description">
+                        A fully functional calculator web application with a sleek UI. Supports 
+                        basic and advanced mathematical operations, keyboard input, and responsive 
+                        design. Built with vanilla JavaScript and modern CSS.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Live Demo</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">
+                        <!-- <div class="project-icon"></div> -->
+                        Student Management System
+                    </div>
+                    <div class="project-description">
+                        A comprehensive student management system developed in C. Features student 
+                        record management, grade calculation, and file-based data storage. 
+                        Demonstrates structured programming and file handling concepts.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">C Language</span>
+                        <span class="tech-tag">File I/O</span>
+                        <span class="tech-tag">Data Structures</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">GitHub</a>
+                        <a href="#" class="project-link">Demo Video</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="education">
+            <h2>Education</h2>
+            <div style="text-align: center; padding: 20px;">
+                <h3 style="font-size: 1.5em; margin-bottom: 10px; color: #00ccff;">
+                    Bachelor of Computer Applications (BCA)
+                </h3>
+                <p style="font-size: 1.1em; opacity: 0.8;">Currently Pursuing</p>
+                <p style="margin-top: 15px; opacity: 0.9;">
+                    Building a strong foundation in computer science, software development, 
+                    and modern programming practices.
+                </p>
+                <hr style="margin: 30px 0; border: none; border-top: 1px solid #222;">
+                <h3 style="font-size: 1.3em; margin-bottom: 8px; color: #00ccff;">
+                    Advanced Diploma in Computer Applications (ADCA)
+                </h3>
+                <p style="font-size: 1.05em; opacity: 0.8;">Completed</p>
+                <p style="margin-top: 10px; opacity: 0.9;">
+                    Covered fundamentals of computer applications, office automation, and basic programming concepts.
+                </p>
+            </div>
+        </div>
+
+        <div class="contact-section" id="contact">
+            <h2 style="font-size: 2.5em; margin-bottom: 30px; background: linear-gradient(45deg, #0066ff, #00ccff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Let's Connect
+            </h2>
+            <p style="font-size: 1.2em; margin-bottom: 40px; opacity: 0.9;">
+                Ready to collaborate on exciting projects or discuss opportunities
+            </p>
+            <a href="mailto:akshatkumarbca@gmail.com" class="contact-btn">
+              📧 Get In Touch
+            </a>
+            
+        </div>
+
+        <div style="text-align: center; margin: 60px 0 0 0;">
+            <a href="https://github.com/yourusername" target="_blank" style="display: inline-block; margin: 0 18px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="width:44px; height:44px; background:#232b38; border-radius:50%; padding:7px;">
+            </a>
+            <a href="https://www.linkedin.com/in/yourusername" target="_blank" style="display: inline-block; margin: 0 18px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" style="width:44px; height:44px; background:#232b38; border-radius:7px; padding:7px;">
+            </a>
+            <a href="https://twitter.com/yourusername" target="_blank" style="display: inline-block; margin: 0 18px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter" style="width:44px; height:44px; background:#232b38; border-radius:50%; padding:7px;">
+            </a>
+        </div>
+
+    </div>
+
+    <div style="text-align: center; color: #888; font-size: 1em; margin: 40px 0 20px 0; opacity: 0.7;">
+        &copy; 2025 Akshat Kumar. All rights reserved.
+    </div>
+
+    <script>
+        // Add smooth scrolling and interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate skill cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'slideInUp 0.6s ease forwards';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.skill-card, .section').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Add typing effect to hero text
+            const heroTitle = document.querySelector('.hero h1');
+            const text = heroTitle.textContent;
+            heroTitle.textContent = '';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    heroTitle.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            
+            setTimeout(typeWriter, 500);
+        });
+
+        // Add CSS for slide-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
